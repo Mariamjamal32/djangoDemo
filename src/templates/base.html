@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang=en>
     <head>
+      <title>{% block head_title %} CFE Django {% endblock head_title %}</title>
     </head>
     <body>
-        <h1> HTML View </h1>
-        <p> This is {% verbatim %} {{str_var}} {% endverbatim %}coming through. </p>
-        {% if bool_item %}
-        <p> Random num is {{ num }} </p>
-        {% endif %}
-
-        {% for item in some_list %}
-          {% if item|divisibleby:"2" %}
-            <p> EVen number </p>
-          {% endif %}
-        <p>{{item}}</p>
-        {% endfor %}
+        <h1> CodeForEntreprenuers.com </h1>
+        <a href="/">Home</a>
+        <a href="/contact/">Contact</a>
+        <a href="/about/">About</a>
+        <div class="container">
+          {% block content %} Hello There! {% endblock content %}
+        </div>
     </body>
 <html>
