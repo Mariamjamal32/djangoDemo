@@ -4,6 +4,16 @@
     </head>
     <body>
         <h1> HTML View </h1>
-        <p> This is {{str_var}} HTML. </p>
+        <p> This is {% verbatim %} {{str_var}} {% endverbatim %}coming through. </p>
+        {% if bool_item %}
+        <p> Random num is {{ num }} </p>
+        {% endif %}
+
+        {% for item in some_list %}
+          {% if item|divisibleby:"2" %}
+            <p> EVen number </p>
+          {% endif %}
+        <p>{{item}}</p>
+        {% endfor %}
     </body>
 <html>

@@ -1,3 +1,4 @@
+import random
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -19,4 +20,6 @@ from django.shortcuts import render
     # return HttpResponse(html_)
 
 def home(request):
-    return render(request, 'base.html', {"str_var": True})
+    num = random.randint(0,100000)
+    some_list = [num, random.randint(0,100000), random.randint(0,100000)]
+    return render(request, 'base.html', {"bool_item": False, "num": num, "some_list": some_list})
