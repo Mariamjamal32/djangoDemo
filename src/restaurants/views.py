@@ -1,6 +1,7 @@
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic.base import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView
 
 from .models import RestaurantLocation
 
@@ -11,3 +12,22 @@ def restaurant_listview(request):
         "object_list": queryset
     }
     return render(request, template_name, context)
+
+class RestaurantListView(ListView):
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        if slug:
+            queryset = RestaurantLocation.objects.filter(
+                Q(category__iexact=slug)|
+                Q(category__icontains=slug)
+            )
+        else:
+            queryset = RestaurantLocation.objects.all()
+        return queryset
+
+class RestaurantDetailView(DetailView):
+    queryset = RestaurantLocation.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        # print(self.kwargs)
+        return super(RestaurantDetailView, self).get_context_data(*args, **kwargs)
